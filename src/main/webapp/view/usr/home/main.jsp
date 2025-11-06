@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div>테스트페이지</div>
-</body>
-</html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="pageTitle" value="메인" />
+
+<%@ include file="/view/usr/common/header.jsp"%>
+<section class="main">
+	<div>나만의 메인페이지</div>
+</section>
+<%@ include file="/view/usr/common/footer.jsp"%>

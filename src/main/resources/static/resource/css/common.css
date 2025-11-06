@@ -1,0 +1,50 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'HsJandari';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/HSJandari.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+html * {
+	font-family: 'HsJandari'; 
+}
+
+.main>div {
+	font-size: 2.5rem;
+	margin-left: 100px;
+	margin-top: 50px;
+}
+.table-box th, .table-box td {
+	padding: 10px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.join-box th, .join-box td {
+	padding: 10px;
+	text-align: center;
+}
+.btns a, .btns button, .submitBtn {
+	padding: 5px;
+	border: 2px solid black;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.btns a:hover, .btns button:hover, .submitBtn:hover {
+	background-color: black;
+	color: white;
+}
+
+.joincontainer {
+	margin-left: 100px;
+}
+
+.title{
+	font-size: 1.5rem;
+}
+
+table {
+	margin-top: 50px;
+}

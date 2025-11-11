@@ -13,6 +13,5 @@ const submitFormChk = function(form) {
 		form.content.focus();
 		return false;
 	}
-	
 	return true;
 }

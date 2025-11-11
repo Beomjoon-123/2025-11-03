@@ -36,5 +36,8 @@
 			<li><a
 				class="flex h-full px-3 items-center hover:underline underline-offset-8"
 				href="/usr/member/join">JOIN</a></li>
+					<li><a
+				class="flex h-full px-3 items-center hover:underline underline-offset-8"
+				href="/usr/member/join">LOGIN</a></li>	
 		</ul>
 	</div>

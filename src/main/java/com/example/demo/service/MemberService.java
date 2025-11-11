@@ -6,7 +6,7 @@ import com.example.demo.dto.Member;
 
 @Service
 public class MemberService {
-	private MemberDao memberDao;
+	private MemberDao memberDao;                                                                                                                                             
 	
 	public MemberService(MemberDao memberDao) {
 		this.memberDao = memberDao;

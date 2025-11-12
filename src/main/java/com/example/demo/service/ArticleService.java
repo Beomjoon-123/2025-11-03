@@ -9,13 +9,13 @@ import com.example.demo.dto.Article;
 public class ArticleService {
 
 	private ArticleDao articleDao;
-
+	
 	public ArticleService(ArticleDao articleDao) {
 		this.articleDao = articleDao;
 	}
-
-	public void writeArticle(String title, String content) {
-		this.articleDao.writeArticle(title, content);
+	
+	public void writeArticle(String title, String content, int loginedMemberId) {
+		this.articleDao.writeArticle(title, content, loginedMemberId);
 	}
 
 	public List<Article> showList() {
@@ -33,8 +33,9 @@ public class ArticleService {
 	public void deleteArticle(int id) {
 		this.articleDao.deleteArticle(id);
 	}
-	
-	public int getLastInsertedId() {
-		return this.articleDao.getLastInsertedId();
+
+	public int getLastInsertId() {
+		return this.articleDao.getLastInsertId();
 	}
+
 }

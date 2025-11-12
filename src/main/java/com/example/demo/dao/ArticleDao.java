@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,51 +14,56 @@ public interface ArticleDao {
 	@Insert("""
 			INSERT INTO article
 				SET regDate = NOW()
-				, updateTime = NOW()
-				, title = #{title}
-				, content = #{content}
+					, updateDate = NOW()
+					, memberId = #{loginedMemberId}
+					, title = #{title}
+					, content = #{content}
 			""")
-
-	public void writeArticle(String title, String content);
+	public void writeArticle(String title, String content, int loginedMemberId);
 
 	@Select("""
-			SELECT * FROM article
-			ORDER BY id DESC
+			SELECT a.id
+					, a.regDate
+					, a.title
+					, m.loginId AS `writerName`
+			    FROM article AS a
+			    INNER JOIN `member` AS m
+			    ON a.memberId = m.id
+			    ORDER BY a.id DESC
 			""")
-
 	public List<Article> showList();
 
 	@Select("""
-			SELECT *
-				FROM article
-				WHERE id = #{id}
+			SELECT a.*
+					, m.loginId AS `writerName`
+				FROM article AS a
+			    INNER JOIN `member` AS m
+			    ON a.memberId = m.id
+				WHERE a.id = #{id}
 			""")
-
 	public Article getArticleById(int id);
 
 	@Update("""
 			<script>
 			UPDATE article
-				SET updateTime = NOW()
-				<if test="title != null and title != ''">
-					, title = #{title}
-				</if>
-				<if test="content != null and content != ''">
-					, content = #{content}
-				</if>
+				SET updateDate = NOW()
+					<if test="title != null and title != ''">
+						, title = #{title}
+					</if>
+					<if test="content != null and content != ''">
+						, content = #{content}
+					</if>
 				WHERE id = #{id}
-				</script>
+			</script>
 			""")
-
 	public void modifyArticle(int id, String title, String content);
 
 	@Delete("""
 			DELETE FROM article
-			WHERE id = #{id}
+				WHERE id = #{id}
 			""")
 	public void deleteArticle(int id);
-	
-	@Select("SELECT LAST_INSERT_ID()")
-	public int getLastInsertedId();
 
+	@Select("SELECT LAST_INSERT_ID()")
+	public int getLastInsertId();
 }

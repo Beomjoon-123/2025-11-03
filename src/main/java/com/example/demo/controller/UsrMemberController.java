@@ -5,18 +5,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.dto.Member;
+import com.example.demo.dto.Req;
 import com.example.demo.dto.ResultData;
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Util;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsrMemberController {
 	
 	private MemberService memberService;
+	private Req req;
 	
-	public UsrMemberController(MemberService memberService) {
+	public UsrMemberController(MemberService memberService, Req req) {
 		this.memberService = memberService;
+		this.req = req;
 	}
 	
 	@GetMapping("/usr/member/join")
@@ -30,7 +32,7 @@ public class UsrMemberController {
 
 		this.memberService.joinMember(loginId, loginPw, name);
 		
-		return Util.jsReplace(String.format("[ %s ]님 환영합니다 :)", loginId), "/");
+		return Util.jsReplace(String.format("%s님 환영합니다 :)", loginId), "login");
 	}
 	
 	@GetMapping("/usr/member/loginIdDupChk")
@@ -40,9 +42,9 @@ public class UsrMemberController {
 		Member member = this.memberService.getMemberByLoginId(loginId);
 		
 		if (member != null) {
-			return new ResultData<>("F-1", "이미 사용중인 아이디입니다");
+			return new ResultData<>("F-1", String.format("[ %s ]은(는) 이미 사용중인 아이디입니다", loginId));
 		}
-		return new ResultData<>("S-1", "사용 가능한 아이디입니다");
+		return new ResultData<>("S-1", "[ %s ]은(는) 사용 가능한 아이디입니다", loginId);
 	}
 	
 	@GetMapping("/usr/member/login")
@@ -57,7 +59,7 @@ public class UsrMemberController {
 		Member member = this.memberService.getMemberByLoginId(loginId);
 		
 		if (member == null) {
-			return new ResultData<>("F-1", "아이디를 확인해주세요");
+			return new ResultData<>("F-1", "존재하지 않는 아이디입니다. 다시 확인해주세요");
 		}
 		
 		if (!member.getLoginPw().equals(loginPw)) {
@@ -69,19 +71,19 @@ public class UsrMemberController {
 	
 	@PostMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpSession session, int loginedMemberId, String loginId) {
+	public String doLogin(int loginedMemberId, String loginId) {
 		
-		session.setAttribute("loginedMemberId", loginedMemberId);
+		this.req.login(loginedMemberId);
 		
-		return Util.jsReplace(String.format("[ %s ] 님 환영합니다~!", loginId), "/");
+		return Util.jsReplace(null, "/");
 	}
 	
 	@GetMapping("/usr/member/logout")
 	@ResponseBody
-	public String logout(HttpSession session) {
+	public String logout() {
 		
-		session.invalidate();
+		this.req.logout();
 		
-		return Util.jsReplace("정상적으로 로그아웃 되었습니다", "/");
+		return Util.jsReplace(null, "/");
 	}
 }

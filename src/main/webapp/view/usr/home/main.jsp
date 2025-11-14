@@ -5,7 +5,6 @@
 
 <%@ include file="/view/usr/common/header.jsp"%>
 <section class="main">
-	<div class="maintitle">나만의 메인페이지</div>
 </section>
 <ul class="list bg-base-100 rounded-box shadow-md">
   

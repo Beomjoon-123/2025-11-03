@@ -59,7 +59,7 @@
 					<table class="w-1/3 mx-auto">
 						<tr>
 							<th>아이디</th>
-							<td><input class="border w-full" name="loginId" type="text"/></td>
+							<td><input class="border w-full" name="loginId" type="text" placeholder="아이디 입력"/></td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>

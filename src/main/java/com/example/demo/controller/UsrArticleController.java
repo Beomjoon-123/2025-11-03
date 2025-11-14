@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.dto.Article;
 import com.example.demo.service.ArticleService;
+import com.example.demo.service.BoardService;
 import com.example.demo.util.Util;
 import jakarta.servlet.http.HttpSession;
 
@@ -15,9 +16,11 @@ import jakarta.servlet.http.HttpSession;
 public class UsrArticleController {
 	
 	private ArticleService articleService;
+	private BoardService boardService;
 	
-	public UsrArticleController(ArticleService articleService) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService) {
 		this.articleService = articleService;
+		this.boardService = boardService;
 	}
 	
 	@GetMapping("/usr/article/write")
@@ -33,15 +36,17 @@ public class UsrArticleController {
 		
 		int id = this.articleService.getLastInsertId();
 		
-		return Util.jsReplace("작성 완료", String.format("detail?id=%d", id));
+		return Util.jsReplace(String.format("%d번 게시물이 작성되었습니다", id), String.format("detail?id=%d", id));
 	}
 	
 	@GetMapping("/usr/article/list")
-	public String list(Model model) {
+	public String list(Model model, int boardId) {
 		
-		List<Article> articles = this.articleService.showList();
+		List<Article> articles = this.articleService.showList(boardId);
+		String boardName = this.boardService.getBoardNameById(boardId);
 		
 		model.addAttribute("articles", articles);
+		model.addAttribute("boardName", boardName);
 		
 		return "usr/article/list";
 	}

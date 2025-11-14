@@ -22,20 +22,17 @@ public interface ArticleDao {
 	public void writeArticle(String title, String content, int loginedMemberId);
 
 	@Select("""
-			SELECT a.id
-					, a.regDate
-					, a.title
-					, m.loginId AS `writerName`
+			SELECT a.id , a.regDate, a.title, m.loginId AS `writerName`
 			    FROM article AS a
 			    INNER JOIN `member` AS m
 			    ON a.memberId = m.id
+			    WHERE a.boardId = #{boardId}
 			    ORDER BY a.id DESC
 			""")
-	public List<Article> showList();
+	public List<Article> showList(int boardId);
 
 	@Select("""
-			SELECT a.*
-					, m.loginId AS `writerName`
+			SELECT a.*, m.loginId AS `writerName`
 				FROM article AS a
 			    INNER JOIN `member` AS m
 			    ON a.memberId = m.id

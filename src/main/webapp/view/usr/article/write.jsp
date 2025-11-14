@@ -11,6 +11,12 @@
 			<form action="/usr/article/doWrite" method="post" onsubmit="return submitFormChk(this);">
 				<div class="table-box">
 					<table class="w-1/2 mx-auto">
+   						<label for="boardId">게시판 선택</label>
+   					 	<select name="boardId" id="boardId">
+        					<c:forEach var="board" items="${boards}">
+           						<option value="${board.id}">${board.name}</option>
+           					</c:forEach>
+    					</select>
 						<tr>
 							<th>제목</th>
 							<td><input name="title" type="text" class="input w-full" placeholder="Type here" /></td>

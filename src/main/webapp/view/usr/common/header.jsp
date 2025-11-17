@@ -20,24 +20,25 @@
 <body>
 <div class="navbar bg-base-200">
   <div class="ps-4">
-    <a href="/"class="text-lg font-bold"><i class="fa-brands fa-figma"></i></a>
+    <a href="/"class="text-lg font-bold"><i class="fa-brands fa-figma"></i></a>   
   </div>
+   <div class="main-title">SHieeettt</div>
   <div class="flex grow justify-end px-2">
     <div class="flex items-stretch">
    	 <c:if test="${req.getLoginedMember().getId() == 0 }">
-      <a href="/usr/member/join" class="btn btn-ghost rounded-field">회원가입</a>
-      <a href="/usr/member/login" class="btn btn-ghost rounded-field">로그인</a>
+      <a href="/usr/member/join" class="btn btn-ghost rounded-field">Join</a>
+      <a href="/usr/member/login" class="btn btn-ghost rounded-field">Login</a>
      </c:if>
      <c:if test="${req.getLoginedMember().getId() != 0 }">
-     	 <a href="/usr/member/logout" class="btn btn-ghost rounded-field">로그아웃</a>
-     	 <a href="/usr/article/write" class="btn btn-ghost rounded-field">글 작성</a>
+     	 <a href="/usr/member/logout" class="btn btn-ghost rounded-field">Logout</a>
+     	 <a href="/usr/article/write?boardId=2" class="btn btn-ghost rounded-field">Post</a>
      </c:if>
       <div class="dropdown dropdown-end">
-       	<div tabindex="0" role="button" class="btn btn-ghost rounded-field">글 목록</div>
-      	 <ul tabindex="-1" class="menu dropdown-content bg-base-200 rounded-box z-1 mt-4 w-52 p-2 shadow-sm">
-          <li><a href="/usr/article/list">공지사항</a></li>
-          <li><a href="/usr/article/list">자유게시판</a></li>
-          <li><a href="/usr/article/list">Q & A</a></li>
+       	<div tabindex="0" role="button" class="btn btn-ghost rounded-field">List</div>
+      	 <ul tabindex="-1" class="menu dropdown-content bg-base-200 rounded-box z-1 mt-4 w-35 p-2 shadow-sm">
+          <li><a href="/usr/article/list?boardId=1">Announcement</a></li>
+          <li><a href="/usr/article/list?boardId=2">Bulletin</a></li>
+          <li><a href="/usr/article/list?boardId=3">Q & A</a></li>
         </ul>
       </div>
     </div>

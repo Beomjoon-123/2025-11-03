@@ -10,28 +10,32 @@
 	<div class="container mx-auto">
 		<div class="ml-8 mb-2">
 			<div class="mb-1">
-				<span class="text-2xl">${boardName } 게시판</span>
+				<span class="text-2xl">${boardName }</span>
 			</div>
 			<div>
 				<span>총 : ${articlesCnt }개</span>
 			</div>
 		</div>
-		<div class="table-box">
-			<table class="table">
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-				<c:forEach items="${articles }" var="article">
-					<tr class="hover:bg-base-300">
-						<td>${article.getId() }</td>
-						<td class="hover:underline underline-offset-4"><a href="/usr/article/detail?id=${article.getId() }">${article.getTitle() }</a></td>
-						<td>${article.getWriterName() }</td>
-						<td>${article.getRegDate() }</td>
+		<div class="overflow-x-auto">
+			<table class="table table-xs">
+				<thead>
+					<tr>
+						<th></th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
 					</tr>
-				</c:forEach>
+				</thead>
+				<tbody>
+					<c:forEach items="${articles }" var="article">
+						<tr>
+							<th>${article.getId() }</th>
+							<td><a href="/usr/article/detail?id=${article.getId() }">${article.getTitle() }</a></td>
+							<td>${article.getWriterName() }</td>
+							<td>${article.getRegDate() }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 		<div class="bg-white px-6 pt-6 flex justify-end">

@@ -46,6 +46,7 @@ public class UsrArticleController {
 	@GetMapping("/usr/article/list")
 	public String list(Model model, int boardId, @RequestParam(defaultValue = "1") int cPage) {
 		
+		
 		int itemsInAPage = 10;
 		int limitFrom = (cPage - 1) * itemsInAPage;
 		int articlesCnt = this.articleService.getArticlesCnt(boardId);
@@ -103,11 +104,11 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/delete")
 	@ResponseBody
-	public String delete(int id) {
+	public String delete(int id, int boardId) {
 		
 		this.articleService.deleteArticle(id);
 		
-		return Util.jsReplace("게시물이 삭제되었습니다", "list");
+		return Util.jsReplace("게시물이 삭제되었습니다", String.format("list?boardId=%d", boardId));
 	}
 	
 }

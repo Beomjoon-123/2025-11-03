@@ -6,7 +6,7 @@
 
 <%@ include file="/view/usr/common/header.jsp"%>
 
-<section class="mt-8">
+<section class="mt-8 w-1/2 mx-auto">
 	<div class="container mx-auto">
 		<div class="table-box">
 			<table class="table">
@@ -42,8 +42,7 @@
 					onclick="history.back();">뒤로가기</button>
 			</div>
 
-			<c:if
-				test="${req.getLoginedMember().getId() == article.getMemberId() }">
+			<c:if test="${req.getLoginedMember().getId() == article.getMemberId() }">
 				<div class="flex">
 					<div class="mr-2">
 						<a class="btn btn-neutral btn-outline btn-xs"
@@ -51,7 +50,7 @@
 					</div>
 					<div>
 						<a class="btn btn-neutral btn-outline btn-xs"
-							href="/usr/article/delete?id=${article.getId() }"
+							href="/usr/article/delete?id=${article.getId() }&boardId=${article.getBoardId() }"
 							onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 					</div>
 				</div>

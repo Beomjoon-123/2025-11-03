@@ -7,28 +7,28 @@
 <%@ include file="/view/usr/common/header.jsp" %>
 
 	<section class="mt-8">
-		<div class="container mx-auto">	
+		<div class="container mx-auto w-1/2">	
 			<form action="/usr/article/doWrite" method="post" onsubmit="return submitFormChk(this);">
 				<div class="table-box">
 					<table class="table">
 						<tr>
-							<th>게시판</th>
+							<th>Board Type</th>
 							<td>
 								<c:if test="${req.getLoginedMember().getAuthLevel() == 0 }">
 									<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="1" /> 공지</label>
 								</c:if>
 								&nbsp;&nbsp;&nbsp;
-								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="2" ${boardId == 2 ? "checked" : ""} /> 자유</label>
+								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="2" ${boardId == 2 ? "checked" : ""} />Bulletin</label>
 								&nbsp;&nbsp;&nbsp;
-								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="3" ${boardId == 3 ? "checked" : ""} /> 질문과 답변</label>
+								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="3" ${boardId == 3 ? "checked" : ""} />Q & A</label>
 							</td>
 						</tr>
 						<tr>
-							<th>제목</th>
+							<th>Title</th>
 							<td><input class="input input-neutral" name="title" type="text"/></td>
 						</tr>
 						<tr>
-							<th>내용</th>
+							<th>Body</th>
 							<td><textarea class="textarea textarea-neutral" name="content"></textarea></td>
 						</tr>
 						<tr>

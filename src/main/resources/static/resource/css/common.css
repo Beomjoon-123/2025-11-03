@@ -48,6 +48,10 @@ textarea[name="content"] {
 	font-size: 1.5rem;
 	margin-left: 3%;
 }
+.main-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
 i {
 	font-size: 2rem;
 }

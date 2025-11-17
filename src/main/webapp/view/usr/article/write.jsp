@@ -10,29 +10,35 @@
 		<div class="container mx-auto">	
 			<form action="/usr/article/doWrite" method="post" onsubmit="return submitFormChk(this);">
 				<div class="table-box">
-					<table class="w-1/2 mx-auto">
-   						<label for="boardId">게시판 선택</label>
-   					 	<select name="boardId" id="boardId">
-        					<c:forEach var="board" items="${boards}">
-           						<option value="${board.id}">${board.name}</option>
-           					</c:forEach>
-    					</select>
+					<table class="table">
+						<tr>
+							<th>게시판</th>
+							<td>
+								<c:if test="${req.getLoginedMember().getAuthLevel() == 0 }">
+									<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="1" /> 공지</label>
+								</c:if>
+								&nbsp;&nbsp;&nbsp;
+								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="2" ${boardId == 2 ? "checked" : ""} /> 자유</label>
+								&nbsp;&nbsp;&nbsp;
+								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="3" ${boardId == 3 ? "checked" : ""} /> 질문과 답변</label>
+							</td>
+						</tr>
 						<tr>
 							<th>제목</th>
-							<td><input name="title" type="text" class="input w-full" placeholder="Type here" /></td>
+							<td><input class="input input-neutral" name="title" type="text"/></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-  							<td><textarea name="content" class="textarea w-full" placeholder="Type here"></textarea></td>
+							<td><textarea class="textarea textarea-neutral" name="content"></textarea></td>
 						</tr>
 						<tr>
-							<td colspan="2"><button class="submitBtn w-32">작성</button></td>
+							<td colspan="2"><button class="btn btn-neutral btn-outline btn-sm btn-wide">작성</button></td>
 						</tr>
 					</table>
 				</div>
 			</form>
-			<div class="btns mt-3 text-sm">
-				<div><button onclick="history.back();">뒤로가기</button></div>
+			<div class="bg-white p-6">
+				<div><button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button></div>
 			</div>
 		</div>
 	</section>

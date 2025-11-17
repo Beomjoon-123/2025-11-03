@@ -24,11 +24,11 @@
   </div>
   <div class="flex grow justify-end px-2">
     <div class="flex items-stretch">
-   	 <c:if test="${req.getLoginedMemberId() == -1 }">
+   	 <c:if test="${req.getLoginedMember().getId() == 0 }">
       <a href="/usr/member/join" class="btn btn-ghost rounded-field">회원가입</a>
       <a href="/usr/member/login" class="btn btn-ghost rounded-field">로그인</a>
      </c:if>
-     <c:if test="${req.getLoginedMemberId() != -1 }">
+     <c:if test="${req.getLoginedMember().getId() != 0 }">
      	 <a href="/usr/member/logout" class="btn btn-ghost rounded-field">로그아웃</a>
      	 <a href="/usr/article/write" class="btn btn-ghost rounded-field">글 작성</a>
      </c:if>

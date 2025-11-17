@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="로그인"/>
+<c:set var="pageTitle" value="로그인" />
 
-<%@ include file="/view/usr/common/header.jsp" %>
-	
-	<script>
+<%@ include file="/view/usr/common/header.jsp"%>
+
+<script>
 		const loginFormSubmit = function(form) {
 			form.loginId.value = form.loginId.value.trim();
 			form.loginPw.value = form.loginPw.value.trim();
@@ -40,7 +40,14 @@
 					} else {
 						validLoginInfoMsg.removeClass('text-red-500');
 						validLoginInfoMsg.empty();
-						$(form).append(`<input type='hidden' name='loginedMemberId' value='\${data.rsData}' />`);
+						
+						let addInputHidden = `
+							<input type='hidden' name='loginedMemberId' value='\${data.rsData.id}' />
+							<input type='hidden' name='loginedMemberAuthLevel' value='\${data.rsData.authLevel}' />
+						`
+
+						$(form).append(addInputHidden);
+						
 						form.submit();
 					}
 				},
@@ -48,33 +55,28 @@
 					console.log(error);
 				}
 			})
-		}
-		
+		}	
 	</script>
 
-	<section class="mt-8">
-		<div class="container mx-auto">	
-			<form action="/usr/member/doLogin" method="post" onsubmit="loginFormSubmit(this); return false;">
-				<div class="flex justify-center">
-					<fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-					  <legend class="fieldset-legend">로그인</legend>
-					
-					  <label class="label">아이디</label>
-					  <input name="loginId" type="text" class="input" placeholder="아이디 입력"/>
-					
-					  <label class="label">비밀번호</label>
-					  <input name="loginPw" type="password" class="input" placeholder="비밀번호 입력"/>
-					  
-					  <div id="validLoginInfoMsg" class="mt-2 text-sm h-5 text-center mx-auto w-72"></div>
-					  <button class="btn btn-neutral mt-2">로그인</button>
-					</fieldset>
-				</div>
-
-			</form>
-			<div class="bg-white mt-4 w-xs mx-auto">
-				<div><button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button></div>
+<section class="mt-8">
+	<div class="container mx-auto">
+		<form action="/usr/member/doLogin" method="post"
+			onsubmit="loginFormSubmit(this); return false;">
+			<div class="flex justify-center">
+				<fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+					<legend class="fieldset-legend">로그인</legend>
+					<label class="label">아이디</label>
+					<input name="loginId" type="text" class="input" /> 
+					<label class="label">비밀번호</label> <input name="loginPw" type="password" class="input" />
+					<div id="validLoginInfoMsg" class="mt-2 text-sm h-5 text-center mx-auto w-72"></div>
+					<button class="btn btn-neutral mt-2">로그인</button>
+				</fieldset>
+			</div>
+		</form>
+		<div class="bg-white mt-4 w-xs mx-auto">
+			<div>
+				<button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button>
 			</div>
 		</div>
-	</section>
-	
-<%@ include file="/view/usr/common/footer.jsp" %>
+	</div>
+</section>

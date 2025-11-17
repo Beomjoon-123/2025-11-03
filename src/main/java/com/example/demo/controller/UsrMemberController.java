@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.demo.dto.LoginedMember;
 import com.example.demo.dto.Member;
 import com.example.demo.dto.Req;
 import com.example.demo.dto.ResultData;
@@ -42,9 +44,9 @@ public class UsrMemberController {
 		Member member = this.memberService.getMemberByLoginId(loginId);
 		
 		if (member != null) {
-			return new ResultData<>("F-1", String.format("[ %s ]은(는) 이미 사용중인 아이디입니다", loginId));
+			return new ResultData<>("F-1", "이미 사용중인 아이디입니다");
 		}
-		return new ResultData<>("S-1", "[ %s ]은(는) 사용 가능한 아이디입니다", loginId);
+		return new ResultData<>("S-1", "사용 가능한 아이디입니다");
 	}
 	
 	@GetMapping("/usr/member/login")
@@ -54,7 +56,7 @@ public class UsrMemberController {
 	
 	@PostMapping("/usr/member/validLoginInfo")
 	@ResponseBody
-	public ResultData<Integer> validLoginInfo(String loginId, String loginPw) {
+	public ResultData<Member> validLoginInfo(String loginId, String loginPw) {
 		
 		Member member = this.memberService.getMemberByLoginId(loginId);
 		
@@ -66,14 +68,14 @@ public class UsrMemberController {
 			return new ResultData<>("F-2", "비밀번호가 일치하지 않습니다");
 		}
 		
-		return new ResultData<>("S-1", "로그인 가능", member.getId());
+		return new ResultData<>("S-1", "로그인 가능", member);
 	}
 	
 	@PostMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(int loginedMemberId, String loginId) {
+	public String doLogin(int loginedMemberId, int loginedMemberAuthLevel, String loginId) {
 		
-		this.req.login(loginedMemberId);
+		this.req.login(new LoginedMember(loginedMemberId, loginedMemberAuthLevel));
 		
 		return Util.jsReplace(null, "/");
 	}

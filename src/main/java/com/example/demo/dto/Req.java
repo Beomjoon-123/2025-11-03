@@ -15,7 +15,7 @@ import lombok.Getter;
 public class Req {
 	
 	@Getter
-	private int loginedMemberId;
+	private LoginedMember loginedMember;
 	private HttpServletResponse resp;
 	private HttpSession session;
 	
@@ -25,13 +25,11 @@ public class Req {
 		
 		this.session = request.getSession();
 		
-		int loginedMemberId = -1;
+		this.loginedMember = (LoginedMember) this.session.getAttribute("loginedMember");
 		
-		if (this.session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) this.session.getAttribute("loginedMemberId");
+		if (this.loginedMember == null) {
+			this.loginedMember = new LoginedMember();
 		}
-		
-		this.loginedMemberId = loginedMemberId;
 		
 		request.setAttribute("req", this);
 	}
@@ -47,8 +45,8 @@ public class Req {
 		}
 	}
 
-	public void login(int loginedMemberId) {
-		this.session.setAttribute("loginedMemberId", loginedMemberId);
+	public void login(LoginedMember loginedMember) {
+		this.session.setAttribute("loginedMember", loginedMember);
 	}
 
 	public void logout() {

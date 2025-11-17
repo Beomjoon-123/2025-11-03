@@ -1,10 +1,148 @@
+DROP DATABASE IF EXISTS a2;
 CREATE DATABASE a2;
 USE a2;
 
 CREATE TABLE article(
-	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
-	, regDate DATETIME NOT NULL
-	, updateTime DATETIME NOT NULL
-	, title VARCHAR(100) NOT NULL
-	, content TEXT NOT NULL
+id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+, regDate DATETIME NOT NULL
+, updateDate DATETIME NOT NULL
+, memberId INT UNSIGNED NOT NULL
+, title VARCHAR(100) NOT NULL
+, content TEXT NOT NULL
+, boardId INT UNSIGNED NOT NULL
 );
+
+CREATE TABLE `member`(
+id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+, regDate DATETIME NOT NULL
+, updateDate DATETIME NOT NULL
+, loginId VARCHAR(50) NOT NULL
+, loginPw VARCHAR(100) NOT NULL
+, `name` VARCHAR(20) NOT NULL
+, authLevel INT UNSIGNED NOT NULL DEFAULT 1 COMMENT '관리자 = 0, 사용자 = 1'
+);
+
+CREATE TABLE board(
+id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+, boardName VARCHAR(20) NOT NULL
+);
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 2
+, title = '제목1'
+, content = '내용1'
+, boardId = 2;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 1
+, title = '제목2'
+, content = '내용2'
+, boardId = 3;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 2
+, title = '제목3'
+, content = '내용3'
+, boardId = 3;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 2
+, title = '제목4'
+, content = '내용4'
+, boardId = 3;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 1
+, title = '공지1'
+, content = '공지 내용1'
+, boardId = 1;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 1
+, title = '공지2'
+, content = '공지 내용2'
+, boardId = 1;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 2
+, title = '제목7'
+, content = '내용7'
+, boardId = 2;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 1
+, title = '공지3'
+, content = '공지 내용3'
+, boardId = 1;
+
+INSERT INTO article
+SET regDate = NOW()
+, updateDate = NOW()
+, memberId = 4
+, title = '제목9'
+, content = '내용9'
+, boardId = 2;
+
+INSERT INTO `member`
+SET regDate = NOW()
+, updateDate = NOW()
+, loginId = 'admin'
+, loginPw = 'admin'
+, `name` = 'admin'
+, authLevel = 0;
+
+INSERT INTO `member`
+SET regDate = NOW()
+, updateDate = NOW()
+, loginId = 'test1'
+, loginPw = 'test1'
+, `name` = 'test1';
+
+INSERT INTO `member`
+SET regDate = NOW()
+, updateDate = NOW()
+, loginId = 'test2'
+, loginPw = 'test2'
+, `name` = 'test2';
+
+INSERT INTO `member`
+SET regDate = NOW()
+, updateDate = NOW()
+, loginId = 'test3'
+, loginPw = 'test3'
+, `name` = 'test3';
+
+INSERT INTO board
+SET boardName = '공지사항';
+INSERT INTO board
+SET boardName = '자유';
+INSERT INTO board
+    SET boardName = '질문과답변';
+    SET boardName = '질문과 답변';
+
+SELECT * FROM article;
+SELECT * FROM `member`;
+SELECT * FROM board;
+SELECT * FROM board;
+
+/*
+페이징 테스트용 더미데이터
+insert into article (regDate, updateDate, memberId, title, content, boardId)
+select now(), now(), floor(rand() * 3) + 2, concat('제목_', substr(RAND(), 1, 5)), CONCAT('내용_', SUBSTR(RAND(), 1, 5)), FLOOR(RAND() * 2) + 2 from article;
+*/

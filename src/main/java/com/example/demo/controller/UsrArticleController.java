@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,11 +50,11 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/list")
-	public String list(Model model, int boardId, @RequestParam(defaultValue = "1") int cPage) {
+	public String list(Model model, int boardId, @RequestParam(defaultValue = "1") int cPage, @RequestParam(defaultValue = "") String keyword) {
 		
 		int itemsInAPage = 10;
 		int limitFrom = (cPage - 1) * itemsInAPage;
-		int articlesCnt = this.articleService.getArticlesCnt(boardId);
+		int articlesCnt = this.articleService.getArticlesCnt(boardId, keyword);
 		int totalPagesCnt = (int) Math.ceil(articlesCnt / (double) itemsInAPage);
 		
 		int begin = ((cPage - 1) /10) *10 + 1;
@@ -61,7 +64,7 @@ public class UsrArticleController {
 			end = totalPagesCnt;
 		}
 		
-		List<Article> articles = this.articleService.showList(boardId, limitFrom, itemsInAPage);
+		List<Article> articles = this.articleService.showList(boardId, limitFrom, itemsInAPage, keyword);
 		String boardName = this.boardService.getBoardNameById(boardId);
 		
 		model.addAttribute("articles", articles);
@@ -71,6 +74,7 @@ public class UsrArticleController {
 		model.addAttribute("begin", begin);
 		model.addAttribute("end", end);
 		model.addAttribute("cPage", cPage);
+		model.addAttribute("keyword", keyword);
 		
 		return "usr/article/list";
 	}
@@ -113,4 +117,26 @@ public class UsrArticleController {
 		return Util.jsReplace("게시물이 삭제되었습니다", String.format("list?boardId=%d", boardId));
 	}
 	
+	@PostMapping("/usr/article/toggleLike")
+    @ResponseBody
+    public Map<String, Object> toggleLike(int relId) {
+        int memberId = req.getLoginedMember().getId();
+        boolean liked;
+
+        if(articleService.likeStatus(memberId, relId) > 0) {
+            articleService.dislike(memberId, relId);
+            liked = false;
+        } else {
+            articleService.likePlus(memberId, relId);
+            liked = true;
+        }
+
+        int count = articleService.likeCount(relId);
+
+        Map<String, Object> res = new HashMap<>();
+        res.put("liked", liked);
+        res.put("count", count);
+
+        return res;
+    }
 }

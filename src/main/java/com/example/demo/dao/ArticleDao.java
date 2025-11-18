@@ -23,15 +23,20 @@ public interface ArticleDao {
 	public void writeArticle(String title, String content, int loginedMemberId, int boardId);
 
 	@Select("""
+			<script>
 			SELECT a.id, a.regDate, a.title, m.loginId AS `writerName`
 			    FROM article AS a
-			    	INNER JOIN `member` AS m
-			    	ON a.memberId = m.id
-			    	WHERE a.boardId = #{boardId} 
-			    	ORDER BY a.id DESC
-			    	LIMIT #{limitFrom}, #{itemsInAPage}
-				""")
-	public List<Article> showList(int boardId, int limitFrom, int itemsInAPage);
+			    INNER JOIN `member` AS m
+			    ON a.memberId = m.id
+			    WHERE a.boardId = #{boardId} 
+				<if test="keyword != null and keyword != ''">
+					AND a.title LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+			    ORDER BY a.id DESC
+			    LIMIT #{limitFrom}, #{itemsInAPage}
+			 </script>
+			""")
+	public List<Article> showList(int boardId, int limitFrom, int itemsInAPage, String keyword);
 
 	@Select("""
 			SELECT a.*, m.loginId AS `writerName`
@@ -67,10 +72,39 @@ public interface ArticleDao {
 	public int getLastInsertId();
 	
 	@Select("""
+			<script>
 			SELECT COUNT(id)
 				FROM article
 				WHERE boardId = #{boardId}
+				<if test="keyword != null and keyword != ''">
+			    	AND title LIKE CONCAT('%', #{keyword}, '%')
+			    </if>
+			 </script>
 			""")
-	public int getArticlesCnt(int boardId);
+	public int getArticlesCnt(int boardId, String keyword);
+	
+	@Select("""
+			SELECT COUNT(*) FROM likeIt 
+				WHERE memberID = #{memberId} AND relID = #{relId}
+			""")
+	public int likeStatus(int memberId, int relId);
+	
+	@Select("""
+			SELECT COUNT(*) FROM likeIt
+				WHERE relId = #{relId}
+			""")
+	public int liktCount(int relId);
+	
+	@Insert("""
+			INSERT INTO likeIt(memberId, relId)
+				VALUES (#{memberId}, #{relId})
+			""")
+	public void likePlus(int memberId, int relId);
+	
+	@Delete("""
+			DELETE FROM likeIt
+				WHERE memberId = #{memberId} AND relId = #{relId}
+			""")
+	public void dislike(int memberId, int relId);
 
 }

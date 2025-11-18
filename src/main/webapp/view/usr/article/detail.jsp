@@ -5,7 +5,6 @@
 <c:set var="pageTitle" value="상세" />
 
 <%@ include file="/view/usr/common/header.jsp"%>
-
 <section class="mt-8 w-1/2 mx-auto">
 	<div class="container mx-auto">
 		<div class="table-box">
@@ -17,6 +16,13 @@
 				<tr>
 					<th>작성일</th>
 					<td>${article.getRegDate() }</td>
+				</tr>
+				<tr>
+					<th>좋아요</th>
+					<td><button id="likeBtn" class="${articleLiked ? 'liked' : ''}">
+        <i class="fa-solid fa-heart"></i> 
+        <span id="likeCount">${likeCount}</span>
+    </button></td>
 				</tr>
 				<tr>
 					<th>수정일</th>

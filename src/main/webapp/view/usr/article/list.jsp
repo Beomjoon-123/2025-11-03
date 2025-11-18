@@ -16,23 +16,26 @@
 				<span>total : ${articlesCnt }</span>
 			</div>
 		</div>
-		<div class="overflow-x-auto">
-			<table class="table table-xs">
-				<select class="select select-sm">
-  					<option disabled selected>Select</option>
-  					<option>Announcement</option>
-  					<option>Bulletin</option>
-  					<option>Q & A</option>
-				</select>
+		<div class="overflow-x-auto">	
+			<form action="/usr/article/list" method="GET">
+				<select name="boardId" id="boardSelect">
+        			<option value="1" >Announcement</option>
+        			<option value="2" >Bulletin</option>
+        			<option value="3" >Q & A</option>
+    			</select>
+				<input class="keyword" type="hidden" name="boardId" value="${param.boardId }" /> 
 				<label class="input"> 
 					<svg class="h-[1rem] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    					<g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
-      						<circle cx="11" cy="11" r="8"></circle>
-     						 <path d="m21 21-4.3-4.3"></path>
-    					</g>
-  					</svg> 
-  					<input type="search" required placeholder="Search" />
+   						<g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+     						<circle cx="11" cy="11" r="8"></circle>
+    						<path d="m21 21-4.3-4.3"></path>
+   						</g>
+ 					</svg>
+ 					<input id="searchInput" class="keyword" type="text" name="keyword" required placeholder="Search" value="${keyword }" />
+ 					<button type="submit" class="btn btn-sm btn-neutral">search</button>
 				</label>
+			</form>
+			<table class="table table-xs w-2/3 mx-auto">
 				<thead>
 					<tr>
 						<th></th>
@@ -65,8 +68,7 @@
 					<c:otherwise>
 						<c:if test="${param.boardId != 1 }">
 							<div>
-								<a class="btn btn-neutral btn-outline btn-xs"
-									href="/usr/article/write?boardId=${param.boardId }">글쓰기</a>
+								<a class="btn btn-neutral btn-outline btn-xs" href="/usr/article/write?boardId=${param.boardId }">글쓰기</a>
 							</div>
 						</c:if>
 					</c:otherwise>
@@ -74,27 +76,18 @@
 			</c:if>
 		</div>
 		<div class="flex justify-center">
+			<c:set var="queryString" value="?boardId=${param.boardId }&keyword=${keyword }" />
 			<div class="join">
-				<c:set var="queryString" value="?boardId=${param.boardId }" />
-
 				<c:if test="${begin != 1 }">
-					<a class="join-item btn btn-sm" href="${queryString }&cPage=1"><i
-						class="fa-solid fa-angles-left"></i></a>
-					<a class="join-item btn btn-sm"
-						href="${queryString }&cPage=${begin - 1 }"><i
-						class="fa-solid fa-caret-left"></i></a>
+					<a class="join-item btn btn-sm" href="${queryString }&cPage=1"><i class="fa-solid fa-angles-left"></i></a>
+					<a class="join-item btn btn-sm" href="${queryString }&cPage=${begin - 1 }"><i class="fa-solid fa-caret-left"></i></a>
 				</c:if>
 				<c:forEach begin="${begin }" end="${end }" var="i">
-					<a class="join-item btn btn-sm ${cPage == i ? 'btn-active' : '' }"
-						href="${queryString }&cPage=${i }">${i }</a>
+					<a class="join-item btn btn-sm ${cPage == i ? 'btn-active' : '' }" href="${queryString }&cPage=${i }">${i }</a>
 				</c:forEach>
 				<c:if test="${end != totalPagesCnt }">
-					<a class="join-item btn btn-sm"
-						href="${queryString }&cPage=${end + 1 }"><i
-						class="fa-solid fa-caret-right"></i></a>
-					<a class="join-item btn btn-sm"
-						href="${queryString }&cPage=${totalPagesCnt }"><i
-						class="fa-solid fa-angles-right"></i></a>
+					<a class="join-item btn btn-sm" href="${queryString }&cPage=${end + 1 }"><i class="fa-solid fa-caret-right"></i></a>
+					<a class="join-item btn btn-sm" href="${queryString }&cPage=${totalPagesCnt }"><i class="fa-solid fa-angles-right"></i></a>
 				</c:if>
 			</div>
 		</div>

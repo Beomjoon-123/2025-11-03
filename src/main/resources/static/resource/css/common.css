@@ -46,11 +46,6 @@ textarea[name="content"] {
 	font-size: 1.5rem;
 	margin-left: 3%;
 }
-.input {
-	margin-left: 30px;
-	height: 20px;
-	width: 200px;
-}
 .main-title {
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -58,8 +53,24 @@ textarea[name="content"] {
 i {
 	font-size: 2rem;
 }
-select {
-	font-size: 0.8rem;
-	width: 100px;
+
+.liked {
+	color: red;
+}
+
+label.input {
+    display: flex;        /* 아이콘, input, 버튼 가로 정렬 */
+    align-items: center;  /* 세로 중앙 정렬 */
+    width: 150px;         /* 원하는 전체 너비 */
+    border: 1px solid #ccc;
+    padding: 2px 5px;
+    border-radius: 4px;
+    gap: 4px;     
+    font-size: 0.7rem;        /* 아이템 사이 간격 */
+}
+
+form label.input button {
+	width: 40px;
 	height: 20px;
+	font-size: 0.6rem;
 }

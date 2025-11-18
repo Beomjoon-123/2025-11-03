@@ -47,7 +47,7 @@ public class ArticleService {
 	}
 	
 	public int likeCount(int relId) {
-		return this.articleDao.liktCount(relId);
+		return this.articleDao.likeCount(relId);
 	}
 	
 	public void likePlus(int memberId, int relId) {

@@ -5,7 +5,6 @@
     font-weight: normal;
     font-display: swap;
 }
-
 html * {
 	font-family: 'HsJandari'; 
 }
@@ -13,6 +12,10 @@ html * {
 	padding: 10px;
 	text-align: center;
 	border: 1px solid black;
+}
+.navbar {
+	background-color: #f3b3f5;
+	height: 100px;
 }
 
 .join-box th, .join-box td {
@@ -59,18 +62,48 @@ i {
 }
 
 label.input {
-    display: flex;        /* 아이콘, input, 버튼 가로 정렬 */
-    align-items: center;  /* 세로 중앙 정렬 */
-    width: 150px;         /* 원하는 전체 너비 */
+    display: flex; 
+    align-items: center;  
     border: 1px solid #ccc;
     padding: 2px 5px;
     border-radius: 4px;
     gap: 4px;     
-    font-size: 0.7rem;        /* 아이템 사이 간격 */
+    font-size: 0.7rem;   
+    height: 30px;
 }
 
 form label.input button {
 	width: 40px;
 	height: 20px;
 	font-size: 0.6rem;
+}
+#boardSelect {
+	width: 150px;
+	font-size: 0.8rem;
+}
+
+#list {
+	display: flex;
+	justify-content: space-between;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+}
+
+.select {
+	width: 120px;
+	height: 30px;
+	font-size: 0.6rem;
+	margin-right: 30px;
+}
+.join {
+	margin-bottom: 70px;
+}
+
+.join .join-item {
+	font-size: .6rem;
+}
+.join .join-item i {
+	font-size: .5rem;
 }

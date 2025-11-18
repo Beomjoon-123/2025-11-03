@@ -93,7 +93,7 @@ public interface ArticleDao {
 			SELECT COUNT(*) FROM likeIt
 				WHERE relId = #{relId}
 			""")
-	public int liktCount(int relId);
+	public int likeCount(int relId);
 	
 	@Insert("""
 			INSERT INTO likeIt(memberId, relId)

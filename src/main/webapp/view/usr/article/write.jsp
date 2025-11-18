@@ -15,12 +15,12 @@
 							<th>Board Type</th>
 							<td>
 								<c:if test="${req.getLoginedMember().getAuthLevel() == 0 }">
-									<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="1" /> Announcement</label>
+									<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="1" />&nbsp;&nbsp;Announcement</label>
 								</c:if>
 								&nbsp;&nbsp;&nbsp;
-								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="2" ${boardId == 2 ? "checked" : ""} />Bulletin</label>
+								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="2" ${boardId == 2 ? "checked" : ""} />&nbsp;&nbsp;Bulletin</label>
 								&nbsp;&nbsp;&nbsp;
-								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="3" ${boardId == 3 ? "checked" : ""} />Q & A</label>
+								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="3" ${boardId == 3 ? "checked" : ""} />&nbsp;&nbsp;Q & A</label>
 							</td>
 						</tr>
 						<tr>

@@ -117,9 +117,9 @@ public class UsrArticleController {
 		return Util.jsReplace("게시물이 삭제되었습니다", String.format("list?boardId=%d", boardId));
 	}
 	
-	@PostMapping("/usr/article/toggleLike")
+	@PostMapping("/usr/article/like")
     @ResponseBody
-    public Map<String, Object> toggleLike(int relId) {
+    public Map<String, Object> Like(int relId) {
         int memberId = req.getLoginedMember().getId();
         boolean liked;
 

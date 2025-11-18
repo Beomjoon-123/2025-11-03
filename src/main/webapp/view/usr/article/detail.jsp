@@ -64,3 +64,41 @@
 		</div>
 	</div>
 </section>
+<!-- 좋아요 AJAX -->
+<script>
+document.getElementById("likeBtn").addEventListener("click", function () {
+    const relId = ${article.id};
+
+    fetch("/usr/article/like", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "relId=" + relId
+    })
+    .then(response => response.json())
+    .then(data => {
+        const btn = document.getElementById("likeBtn");
+        const countSpan = document.getElementById("likeCount");
+
+        if (data.liked) {
+            btn.classList.add("liked");
+        } else {
+            btn.classList.remove("liked");
+        }
+
+        countSpan.textContent = data.count;
+    });
+});
+</script>
+
+<style>
+    #likeBtn {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 18px;
+        color: #555;
+    }
+    #likeBtn.liked {
+        color: red;
+    }
+</style>

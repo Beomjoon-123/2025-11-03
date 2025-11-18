@@ -16,13 +16,14 @@
 				<span>total : ${articlesCnt }</span>
 			</div>
 		</div>
-		<div class="overflow-x-auto">	
-			<form action="/usr/article/list" method="GET">
-				<select name="boardId" id="boardSelect">
-        			<option value="1" >Announcement</option>
-        			<option value="2" >Bulletin</option>
-        			<option value="3" >Q & A</option>
-    			</select>
+		<div class="overflow-x-auto">
+			<form id="list" action="/usr/article/list" method="GET">
+    			<select name="boardId" onchange="this.form.submit()" class="select">
+  					<option disabled selected>SELECT</option>
+  					<option value="1" ${param.boardId == 1 ? 'selected' : ''}>Announcement</option>
+    				<option value="2" ${param.boardId == 2 ? 'selected' : ''}>Bulletin</option>
+   					<option value="3" ${param.boardId == 3 ? 'selected' : ''}>Q & A</option>
+				</select>
 				<input class="keyword" type="hidden" name="boardId" value="${param.boardId }" /> 
 				<label class="input"> 
 					<svg class="h-[1rem] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

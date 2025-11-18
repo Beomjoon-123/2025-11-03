@@ -13,17 +13,32 @@
 				<span class="text-2xl">${boardName }</span>
 			</div>
 			<div>
-				<span>총 : ${articlesCnt }개</span>
+				<span>total : ${articlesCnt }</span>
 			</div>
 		</div>
 		<div class="overflow-x-auto">
 			<table class="table table-xs">
+				<select class="select select-sm">
+  					<option disabled selected>Select</option>
+  					<option>Announcement</option>
+  					<option>Bulletin</option>
+  					<option>Q & A</option>
+				</select>
+				<label class="input"> 
+					<svg class="h-[1rem] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    					<g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+      						<circle cx="11" cy="11" r="8"></circle>
+     						 <path d="m21 21-4.3-4.3"></path>
+    					</g>
+  					</svg> 
+  					<input type="search" required placeholder="Search" />
+				</label>
 				<thead>
 					<tr>
 						<th></th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
+						<th>Title</th>
+						<th>Writer</th>
+						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -58,7 +73,6 @@
 				</c:choose>
 			</c:if>
 		</div>
-
 		<div class="flex justify-center">
 			<div class="join">
 				<c:set var="queryString" value="?boardId=${param.boardId }" />

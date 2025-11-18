@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.dto.Article;
+import com.example.demo.dto.Req;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
 import com.example.demo.util.Util;
@@ -18,10 +19,12 @@ public class UsrArticleController {
 	
 	private ArticleService articleService;
 	private BoardService boardService;
+	private Req req;
 	
-	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Req req) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.req = req;
 	}
 	
 	@GetMapping("/usr/article/write")
@@ -36,7 +39,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doWrite(HttpSession session, String title, String content, int boardId) {
 		
-		this.articleService.writeArticle(title, content, (int) session.getAttribute("loginedMemberId"), boardId);
+		this.articleService.writeArticle(title, content, req.getLoginedMember().getId(), boardId);
 		
 		int id = this.articleService.getLastInsertId();
 		
@@ -45,7 +48,6 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/list")
 	public String list(Model model, int boardId, @RequestParam(defaultValue = "1") int cPage) {
-		
 		
 		int itemsInAPage = 10;
 		int limitFrom = (cPage - 1) * itemsInAPage;

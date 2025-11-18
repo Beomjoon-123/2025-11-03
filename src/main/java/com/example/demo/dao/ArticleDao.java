@@ -25,12 +25,12 @@ public interface ArticleDao {
 	@Select("""
 			SELECT a.id, a.regDate, a.title, m.loginId AS `writerName`
 			    FROM article AS a
-			    INNER JOIN `member` AS m
-			    ON a.memberId = m.id
-			    WHERE a.boardId = #{boardId}
-			    ORDER BY a.id DESC
-			    LIMIT #{limitFrom}, #{itemsInAPage}
-			""")
+			    	INNER JOIN `member` AS m
+			    	ON a.memberId = m.id
+			    	WHERE a.boardId = #{boardId} 
+			    	ORDER BY a.id DESC
+			    	LIMIT #{limitFrom}, #{itemsInAPage}
+				""")
 	public List<Article> showList(int boardId, int limitFrom, int itemsInAPage);
 
 	@Select("""
@@ -72,4 +72,5 @@ public interface ArticleDao {
 				WHERE boardId = #{boardId}
 			""")
 	public int getArticlesCnt(int boardId);
+
 }

@@ -15,7 +15,7 @@
 							<th>Board Type</th>
 							<td>
 								<c:if test="${req.getLoginedMember().getAuthLevel() == 0 }">
-									<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="1" /> 공지</label>
+									<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="1" /> Announcement</label>
 								</c:if>
 								&nbsp;&nbsp;&nbsp;
 								<label><input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="2" ${boardId == 2 ? "checked" : ""} />Bulletin</label>

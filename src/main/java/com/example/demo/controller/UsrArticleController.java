@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +61,7 @@ public class UsrArticleController {
 			end = totalPagesCnt;
 		}
 		
-		List<Article> articles = this.articleService.showList(boardId, limitFrom, itemsInAPage, keyword);
+		List<Article> articles = this.articleService.showList(boardId, limitFrom, itemsInAPage, keyword.trim());
 		String boardName = this.boardService.getBoardNameById(boardId);
 		
 		model.addAttribute("articles", articles);
@@ -116,27 +113,4 @@ public class UsrArticleController {
 		
 		return Util.jsReplace("게시물이 삭제되었습니다", String.format("list?boardId=%d", boardId));
 	}
-	
-	@PostMapping("/usr/article/like")
-    @ResponseBody
-    public Map<String, Object> Like(int relId) {
-        int memberId = req.getLoginedMember().getId();
-        boolean liked;
-
-        if(articleService.likeStatus(memberId, relId) > 0) {
-            articleService.dislike(memberId, relId);
-            liked = false;
-        } else {
-            articleService.likePlus(memberId, relId);
-            liked = true;
-        }
-
-        int count = articleService.likeCount(relId);
-
-        Map<String, Object> res = new HashMap<>();
-        res.put("liked", liked);
-        res.put("count", count);
-
-        return res;
-    }
 }

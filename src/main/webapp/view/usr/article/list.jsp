@@ -5,7 +5,6 @@
 <c:set var="pageTitle" value="${boardName } 게시판" />
 
 <%@ include file="/view/usr/common/header.jsp"%>
-
 <section class="mt-8">
 	<div class="container mx-auto">
 		<div class="ml-8 mb-2">

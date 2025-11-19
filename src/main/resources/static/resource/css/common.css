@@ -13,11 +13,10 @@ html * {
 	text-align: center;
 	border: 1px solid black;
 }
-.navbar {
-	background-color: #f3b3f5;
-	height: 100px;
+.summary>li a {
+	font-size: 0.7rem;
+	color: #422ad5;
 }
-
 .join-box th, .join-box td {
 	padding: 10px;
 	text-align: center;
@@ -71,6 +70,9 @@ label.input {
     font-size: 0.7rem;   
     height: 30px;
 }
+.navbar-center {
+	margin-left: 250px;
+}
 
 form label.input button {
 	width: 40px;
@@ -90,12 +92,25 @@ form label.input button {
 	margin-right: auto;
 	padding: 5px;
 }
+.logo {
+	text-align: center;
+}
 
+.buttons {
+	width: 150px;
+	margin-left: 50px;
+	display: flex;
+	justify-content: space-between;
+}
 .select {
 	width: 120px;
 	height: 30px;
 	font-size: 0.6rem;
 	margin-right: 30px;
+}
+.summary { 
+	position: absolute;
+	z-index: 100;
 }
 .join {
 	margin-bottom: 70px;

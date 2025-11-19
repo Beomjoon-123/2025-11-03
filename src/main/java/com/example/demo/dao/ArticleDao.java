@@ -76,7 +76,7 @@ public interface ArticleDao {
 			SELECT COUNT(id)
 				FROM article
 				WHERE boardId = #{boardId}
-				<if test="keyword != null and keyword != ''">
+				<if test="keyword != ''">
 			    	AND title LIKE CONCAT('%', #{keyword}, '%')
 			    </if>
 			 </script>

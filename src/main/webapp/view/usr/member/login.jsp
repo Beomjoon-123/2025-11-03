@@ -64,18 +64,18 @@
 			onsubmit="loginFormSubmit(this); return false;">
 			<div class="flex justify-center">
 				<fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-					<legend class="fieldset-legend">로그인</legend>
-					<label class="label">아이디</label>
+					<legend class="fieldset-legend">LOGIN</legend>
+					<label class="label">ID</label>
 					<input name="loginId" type="text" class="input w-full" /> 
-					<label class="label">비밀번호</label> <input name="loginPw" type="password" class="input" />
+					<label class="label">PASSWORD</label> <input name="loginPw" type="password" class="input" />
 					<div id="validLoginInfoMsg" class="mt-2 text-sm h-5 text-center mx-auto w-72"></div>
-					<button class="btn btn-neutral mt-2">로그인</button>
+					<button class="btn btn-neutral mt-2">LOGIN</button>
 				</fieldset>
 			</div>
 		</form>
 		<div class="bg-white mt-4 w-xs mx-auto">
 			<div>
-				<button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button>
+				<button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">BACK</button>
 			</div>
 		</div>
 	</div>

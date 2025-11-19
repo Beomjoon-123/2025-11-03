@@ -18,13 +18,6 @@
 					<td>${article.getRegDate() }</td>
 				</tr>
 				<tr>
-					<th>좋아요</th>
-					<td><button id="likeBtn" class="${articleLiked ? 'liked' : ''}">
-        <i class="fa-solid fa-heart"></i> 
-        <span id="likeCount">${likeCount}</span>
-    </button></td>
-				</tr>
-				<tr>
 					<th>수정일</th>
 					<td>${article.getUpdateDate() }</td>
 				</tr>
@@ -64,41 +57,3 @@
 		</div>
 	</div>
 </section>
-<!-- 좋아요 AJAX -->
-<script>
-document.getElementById("likeBtn").addEventListener("click", function () {
-    const relId = ${article.id};
-
-    fetch("/usr/article/like", {
-        method: "POST",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: "relId=" + relId
-    })
-    .then(response => response.json())
-    .then(data => {
-        const btn = document.getElementById("likeBtn");
-        const countSpan = document.getElementById("likeCount");
-
-        if (data.liked) {
-            btn.classList.add("liked");
-        } else {
-            btn.classList.remove("liked");
-        }
-
-        countSpan.textContent = data.count;
-    });
-});
-</script>
-
-<style>
-    #likeBtn {
-        border: none;
-        background: none;
-        cursor: pointer;
-        font-size: 18px;
-        color: #555;
-    }
-    #likeBtn.liked {
-        color: red;
-    }
-</style>
